@@ -5,7 +5,7 @@
 	-- exclude citations for which fewer than 20 were issued at any one location
 	-- finally, only include a given citation type at a location if the count of citations at that location amounts to more than 5% of total citations of that type from across the city
 
--- applying the above criteria produces a total of 14 unique citations that redularly take place at 32 locations across the city
+-- applying the above criteria produces a total of 14 unique citations that regularly take place at 32 locations across the city
 
 select
 		A.[Charge Description]
