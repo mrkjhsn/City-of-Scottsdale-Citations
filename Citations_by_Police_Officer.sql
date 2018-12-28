@@ -8,7 +8,7 @@
 -- finds count of citations for each Officer
 -- officer 1335 has a huge margin more than any other officer, why is this?
 select 
-	[Officer Badge #]
+	[Officer Badge #] 
 	,count([Charge Description]) as _count_
 from [dbo].[spd_PDCitations$]
 group by [Officer Badge #]
@@ -24,16 +24,15 @@ select
 	,[Charge Description]
 from [dbo].[spd_PDCitations$]
 where [Citation Date] = '2017-12-25 00:00:00.000' 
---------------------
 
---this doesn't work
+-- find citations by officer for specific periods of the year
 select 
 	[Officer Badge #]
-	,month([Citation Date]) as _month_
-	,count([Charge Description]) as _count_
+	,case when month([Citation Date]) between 1 and 3 
+		then count([Charge Description]) 
+		end as _count_
 
 from [dbo].[spd_PDCitations$]
---where [Citation Date] between convert(datetime,'2018-06-01 00:00:00.000') and CONVERT(datetime,'2018-06-30 00:00:00.000')
-where month([Citation Date]) between 1 and 3
+--where month([Citation Date]) between 1 and 3
 group by [Officer Badge #],month([Citation Date])
 order by count([Charge Description]) desc
