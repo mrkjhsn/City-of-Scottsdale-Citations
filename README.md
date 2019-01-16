@@ -25,6 +25,7 @@ In some of my other repositories, I've focused on answering very specific questi
 #### Analysis by Police Officer
 
 ##### Things to Consider:
++ what is the relationship between beat # to types of citations?
 + are some officers better at enforcing certain citations?
 + am I able to identify specific reasons why some officers have a higher number of citations in a specific "charge description"?
 + is the citation issuing behavior of male officers the same as female officers?
