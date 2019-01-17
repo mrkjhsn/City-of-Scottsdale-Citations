@@ -6,8 +6,7 @@
 	-- finally, only include a given citation type at a location if the count of citations at that location amounts to more than 5% of total citations of that type from across the city
 
 -- applying the above criteria produces a total of 14 unique citations that regularly take place at 32 locations across the city
-
-select
+ select
 		A.[Charge Description]
 		,A._count_
 		,B._charge_description_total_
@@ -42,9 +41,10 @@ select
 
 
 
--- finds the count of unique citations that meet the above criteria
+-- 14 unique citations meet the above criteria for a total of 1460 citations
  select
 	count(distinct(A.[Charge Description])) as _count_unique_citations_
+	,sum(A._count_) as sum_charge_descriptions
  from (
  			 select
 					A.[Charge Description]

@@ -1,5 +1,4 @@
 -- group citations by day in order to find the distribution across the whole year
-
 select 
 	convert(varchar,[Citation Date],101) as Date -- formats date to a more readable format
 	,count([Citation Date] ) as _count_per_day  --finds the total per day
@@ -56,7 +55,6 @@ order by count([Citation Date]) desc
 				,2
 			) as _percent_
 		
-
 	from (select                              -- finds locations grouped by block # and street name with count of citations that took place there on any given day
 		 concat([Street Number],' ',[Street]) as _location_
 		,[Citation Date]
@@ -137,5 +135,5 @@ order by count([Citation Date]) desc
 			  group by [Charge Description]
 		) as B on A.[Charge Description] = B.[Charge Description]
 
-	where [Citation Date] = '2017-11-24 00:00:00.000'  -- selects only for final date of WM Open Tournament
+	where [Citation Date] = '2017-11-24 00:00:00.000'
 	order by _count_ desc
