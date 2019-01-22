@@ -16,10 +16,6 @@ order by count([Charge Description]) desc
 
 
 
-
-
-
-
 -- find citations by officer for specific periods of the year
 select 
 	[Officer Badge #]
