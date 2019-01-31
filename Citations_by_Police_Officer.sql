@@ -1,7 +1,6 @@
 -- are some officers more likely to spot certain behavior?
 -- 286 unique Scottsdale Police Department officers
 -- NULL officer enforced 442 citations, are these automated traffic citations?
--- I could do a join to pull in names of badges, analyze male/female makeup of police force.  Is one gender more likely to enforce certain citations
 -- are some officers more likely to patrol in specific areas of town?  This is probably related to the beat they are assigned to.
 
 
@@ -45,3 +44,16 @@ order by count([Charge Description]) desc
  from [dbo].[spd_PDCitations$]
  group by [Beat]
  order by [Beat] desc
+
+-- group by citations, count number of unique police officers who issued those citations
+
+select 
+	count(distinct([Officer Badge #])) as distinct_officers
+	,[Charge Description]
+	,count([Charge Description]) as count_of_citations
+	
+	,count([Charge Description])/count(distinct([Officer Badge #])) as Charge_to_Unique_Officer_Ratio
+from [dbo].[spd_PDCitations$]
+group by [Charge Description]
+having count(distinct([Officer Badge #])) > 1  --this was needed since several citations have no officer associated with them, resulting in the probelem of dividing by zero
+order by count([Charge Description])/count(distinct([Officer Badge #])) desc
