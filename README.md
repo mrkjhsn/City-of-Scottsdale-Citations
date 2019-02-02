@@ -27,5 +27,6 @@ In some of my other repositories, I've focused on answering very specific questi
 ##### Things to Consider:
 + what is the relationship between beat # to types of citations?
 + are some officers better at enforcing certain citations?
+    + in cases where certain officers have large numbers of citations of one type, this seems to be more of a function that they were assigned to patrol a specific area for specific infractions, rather than the officer simply noticing an infraction while in the course of general patrolling.
 + am I able to identify specific reasons why some officers have a higher number of citations in a specific "charge description"?
-+ is the citation issuing behavior of male officers the same as female officers?
+~~+ is the citation issuing behavior of male officers the same as female officers?~~  Unable to determine this since the Citations dataset only includes officer badge number.  The Incidents dataset includes officer __last name__ along with __first initial__ and __badge number__, but this isn't enough for me to easily determine the sex of the officer.
