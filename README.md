@@ -19,6 +19,12 @@ In some of my other repositories, I've focused on answering very specific questi
 
 ##### Things to Consider:
 + which locations are associated with the highest numbers of citations of any given type?
+    + exclude all citations for which less than 100 were issued over the course of the year throughout the whole city
+	+ exclude citations for which fewer than 20 were issued at any one location
+	+ finally, only include a given citation type at a location if the count of citations at that location amounts to more than 5% of total citations of that type from across the city
+        +  N 82nd St / E Camelback Rd is associated with 74 failures to stop at stop signs, 8.4% of all that took place in Scottsdale.  This could be because Camelback doesn't go through to the 101 to the east, as do many only east/west roads through Scottsdale.  Drivers(especially visitors) heading east aren't expecting the stop sign.
+        + N 64th St / E Cholla St is associated with 109 of 427 total citations of type 'Exceed 15mph In School Crossing'.  The next highest location with this citation was 7xxx N Miller Rd with 71 of the 427.
+        + 7xxx E Camelback Rd (Scottsdale Fashion Square) is associated with 85 of 285 citations of 'Shoplifting-Removal of Goods'
 + is the higher number of citations at these locations attributable to something temporary, or permanent?
 
 
