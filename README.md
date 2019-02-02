@@ -10,8 +10,10 @@ In some of my other repositories, I've focused on answering very specific questi
 
 
 ##### Things to Consider:
-+ which days of the year are associated with the highest/lowest numbers of citations?
-+ for outlier days, what could be contributing factors?
++ which days of the year are associated with the highest/lowest numbers of citations? what could be contributing factors?
+	+ February 3rd, 2018 was associated with 140 citations, the highest per day citation count of the year.  This is attributable to the combination of the final day of the Waste management Open Golf Tournament taking place this day, as well as it being Superbowl Sunday.  Examining the nature and location of these citations, most of these included underage drinking in north Scottsdale and Old Town Scottsdale.  The next highest day of the year(10/19/2017) had only 126, with many other dates clustered closely behind that number.
+	+ December 25, 2017(Christmas Day) had the smallest number of citations with only 4.
+
 + are more broad temperature/seasonal changes a contributing factor to some citations?
 
 
