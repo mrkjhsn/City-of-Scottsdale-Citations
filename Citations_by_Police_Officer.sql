@@ -1,7 +1,6 @@
 -- are some officers more likely to spot certain behavior?
 -- 286 unique Scottsdale Police Department officers
 -- NULL officer enforced 442 citations, are these automated traffic citations?
--- are some officers more likely to patrol in specific areas of town?  This is probably related to the beat they are assigned to.
 
 -- officer badge numbers run from 419 to 1510
 -- are these numbers issued sequentially? if so what can I understand about officer behavior between the oldest officers and the youngest officers?
@@ -9,9 +8,9 @@ select distinct([Officer Badge #])
 from [dbo].[spd_PDCitations$] 
 order by [Officer Badge #]
 
-
 -- finds count of citations for each Officer
--- officer 1335 has a huge margin more than any other officer, why is this?
+-- officer 1335 has 894 citations to his name, a huge margin more than any other officer, why is this?
+-- the next highest officer is 826 with 594 citations
 select 
 	[Officer Badge #] 
 	,count([Charge Description]) as _count_
@@ -19,21 +18,39 @@ from [dbo].[spd_PDCitations$]
 group by [Officer Badge #]
 order by count([Charge Description]) desc
 
+-- do some officers have a high distribution of citations within certain charge descriptions?
+-- for each officer, group citations and count, for the grouping with the highest count, what percent is that of the officers total citations?
+-- limit this to officers with at least 100 citations, reasoning that officers with fewer citations may not have been on the force for long or may not patrol regularly
 
--- a 'beat' number is associated with each citation, how are the beat numbers distributed through the citations?
--- beats ordered by the number of citations in each beat
- select [Beat]
-	,count(*)
- from [dbo].[spd_PDCitations$]
- group by [Beat]
- order by count(*) desc
+select A.[Officer Badge #]
+	   ,max(A.count_per_citation) as max_per_officer
+	   ,[Charge Description]
+	   ,B.count_of_total_citations
+	   ,round(
+			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
+			,2
+			) as _percent_
+from (select [Officer Badge #] --subselect finds top citation type/officer
+		,[Charge Description]
+		,concat([Officer Badge #],[Charge Description]) _badge_charge_max
+		,count(*) as count_per_citation
+	from [dbo].[spd_PDCitations$]
+	group by [Officer Badge #], [Charge Description]
+	) as A
+	left join (select [Officer Badge #]  -- subselect finds total citations/officer
+				,count(*) as count_of_total_citations
+				from [dbo].[spd_PDCitations$]
+				group by [Officer Badge #]
+			   ) as B on B.[Officer Badge #] = A.[Officer Badge #]
+group by A.[Officer Badge #], [Charge Description], B.count_of_total_citations, A.count_per_citation
+having B.count_of_total_citations > 100
+order by round(
+			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
+			,2
+			) desc
 
- -- how many beat numbers are there?
- -- beats run 1-20, and 99, as well as citations associated with no beat
- select [Beat]
- from [dbo].[spd_PDCitations$]
- group by [Beat]
- order by [Beat] desc
+
+
 
 -- group by citations, count number of unique police officers who issued those citations, find ratio of citation counts to distinct police officers who issued those citations
 -- most of the charge descriptions that show up at the top of this query are those that with the highest number of occurences
@@ -95,3 +112,38 @@ group by [Officer Badge #]
 having count([Charge Description]) > 100
 order by count([Charge Description])/count(distinct([Charge Description])) desc
 
+
+-- for each officer, group citations and count, for the grouping with the highest count, what percent is that of the officers total citations?
+-- limit this to officers with at least 100 citations
+
+select A.[Officer Badge #]
+	   ,max(A.count_per_citation) as max_per_officer
+	   ,[Charge Description]
+	   ,B.count_of_total_citations
+	   ,round(
+			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
+			,2
+			) as _percent_
+from (select [Officer Badge #] --subselect finds top citation type/officer
+		,[Charge Description]
+		,concat([Officer Badge #],[Charge Description]) _badge_charge_max--as charge_by_officer
+		,count(*) as count_per_citation
+	from [dbo].[spd_PDCitations$]
+	group by [Officer Badge #], [Charge Description]
+	) as A
+	left join (select [Officer Badge #]  -- subselect finds total citations/officer
+				,count(*) as count_of_total_citations
+				from [dbo].[spd_PDCitations$]
+				group by [Officer Badge #]
+			   ) as B on B.[Officer Badge #] = A.[Officer Badge #]
+group by A.[Officer Badge #], [Charge Description], B.count_of_total_citations, A.count_per_citation
+having B.count_of_total_citations > 100
+order by round(
+			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
+			,2
+			) desc
+
+
+
+
+	
