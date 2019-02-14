@@ -113,7 +113,7 @@ having count([Charge Description]) > 100
 order by count([Charge Description])/count(distinct([Charge Description])) desc
 
 
------------ make temp table with count of citations grouped by officer 
+-- make temp table with count of citations grouped by officer 
  select [Officer Badge #] 
 		 ,[Charge Description]
 		 ,count(*) as count_per_citation
@@ -130,7 +130,7 @@ select A.*
 	,C.count_of_total_citations
 	,round(
 			convert(float, A.count_per_citation)/convert(float, C.count_of_total_citations)*100
-			,2
+			,0
 			) as _percent_
 from #Count_by_Officer as A
 	left outer join #Count_by_Officer as B on B.[Officer Badge #] = A.[Officer Badge #] 
