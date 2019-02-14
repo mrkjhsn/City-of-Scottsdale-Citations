@@ -21,7 +21,7 @@ order by count([Charge Description]) desc
 -- do some officers have a high distribution of citations within certain charge descriptions?
 -- for each officer, group citations and count, for the grouping with the highest count, what percent is that of the officers total citations?
 -- limit this to officers with at least 100 citations, reasoning that officers with fewer citations may not have been on the force for long or may not patrol regularly
-
+-- 23 officers had over 50% of their total citations from one specific charge description
 select A.[Officer Badge #]
 	   ,max(A.count_per_citation) as max_per_officer
 	   ,[Charge Description]
@@ -30,13 +30,15 @@ select A.[Officer Badge #]
 			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
 			,2
 			) as _percent_
-from (select [Officer Badge #] --subselect finds top citation type/officer
+
+from (select [Officer Badge #] --subselect finds top citation type/officer     - top 1?  - distinct()
 		,[Charge Description]
 		,concat([Officer Badge #],[Charge Description]) _badge_charge_max
 		,count(*) as count_per_citation
 	from [dbo].[spd_PDCitations$]
 	group by [Officer Badge #], [Charge Description]
 	) as A
+
 	left join (select [Officer Badge #]  -- subselect finds total citations/officer
 				,count(*) as count_of_total_citations
 				from [dbo].[spd_PDCitations$]
@@ -48,8 +50,6 @@ order by round(
 			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
 			,2
 			) desc
-
-
 
 
 -- group by citations, count number of unique police officers who issued those citations, find ratio of citation counts to distinct police officers who issued those citations
@@ -113,37 +113,42 @@ having count([Charge Description]) > 100
 order by count([Charge Description])/count(distinct([Charge Description])) desc
 
 
--- for each officer, group citations and count, for the grouping with the highest count, what percent is that of the officers total citations?
--- limit this to officers with at least 100 citations
+----------- make temp table with count of citations grouped by officer 
+ select [Officer Badge #] 
+		 ,[Charge Description]
+		 ,count(*) as count_per_citation
+into #Count_by_Officer
+from [dbo].[spd_PDCitations$]
+group by [Officer Badge #], [Charge Description]
 
-select A.[Officer Badge #]
-	   ,max(A.count_per_citation) as max_per_officer
-	   ,[Charge Description]
-	   ,B.count_of_total_citations
-	   ,round(
-			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
+
+-- do some officers have a disproportionate number of their total citations within any given citation type?
+-- limited to officers with at least 100 total citations
+-- took me a while to realize this was a groupwisemax problem
+
+select A.*
+	,C.count_of_total_citations
+	,round(
+			convert(float, A.count_per_citation)/convert(float, C.count_of_total_citations)*100
 			,2
 			) as _percent_
-from (select [Officer Badge #] --subselect finds top citation type/officer
-		,[Charge Description]
-		,concat([Officer Badge #],[Charge Description]) _badge_charge_max--as charge_by_officer
-		,count(*) as count_per_citation
-	from [dbo].[spd_PDCitations$]
-	group by [Officer Badge #], [Charge Description]
-	) as A
-	left join (select [Officer Badge #]  -- subselect finds total citations/officer
+from #Count_by_Officer as A
+	left outer join #Count_by_Officer as B on B.[Officer Badge #] = A.[Officer Badge #] 
+	and B.count_per_citation > A.count_per_citation
+	inner join (select [Officer Badge #]  -- is this the most efficient way for me to be doing this?  Inner joins are slower
 				,count(*) as count_of_total_citations
 				from [dbo].[spd_PDCitations$]
 				group by [Officer Badge #]
-			   ) as B on B.[Officer Badge #] = A.[Officer Badge #]
-group by A.[Officer Badge #], [Charge Description], B.count_of_total_citations, A.count_per_citation
-having B.count_of_total_citations > 100
+				) as C on C.[Officer Badge #] = A.[Officer Badge #]
+
+where B.count_per_citation is null and
+	C.count_of_total_citations > 100
 order by round(
-			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
+			convert(float, A.count_per_citation)/convert(float, C.count_of_total_citations)*100
 			,2
 			) desc
 
+		 
 
 
 
-	
