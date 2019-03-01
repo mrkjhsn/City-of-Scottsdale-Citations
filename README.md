@@ -33,8 +33,8 @@ In some of my other repositories, I've focused on answering very specific questi
 #### Analysis by Police Officer
 
 ##### Things to Consider:
-+ what is the relationship between beat # to types of citations?
 + are some officers better at enforcing certain citations?
+    + One officer(badge #1335) produced almost 900 citations over a 1 year period of time.  The next highest officer had only around 600 citations during this same time period.  It's unclear to me why this one officer produced so many more citations than the other officers.
     + in cases where certain officers have large numbers of citations of one type, this seems to be more of a function that they were assigned to patrol a specific area for specific infractions, rather than the officer simply noticing an infraction while in the course of general patrolling.
 + am I able to identify specific reasons why some officers have a higher number of citations in a specific "charge description"?
     - most of the citations that make up a significant percent of any given officers total citations are speeding tickets(Speed Greater Than R&P or Posted).  However a handful of officers(badge# 1402 - 68%, badge# 1273 - 60%, badge# 1337 - 56%) have a disproportionate amount of their total citations within the 'DUI-Impaired to Slightest Degree' category.  It's possible these officers are more regularly assigned to task force duties patrolling specific areas and times when they are more likely to enforce DUI citations.
