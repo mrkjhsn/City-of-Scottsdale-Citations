@@ -31,7 +31,7 @@ select A.[Officer Badge #]
 			,2
 			) as _percent_
 
-from (select [Officer Badge #] --subselect finds top citation type/officer     - top 1?  - distinct()
+from (select [Officer Badge #] --subselect finds top citation type/officer
 		,[Charge Description]
 		,concat([Officer Badge #],[Charge Description]) _badge_charge_max
 		,count(*) as count_per_citation
@@ -50,7 +50,6 @@ order by round(
 			convert(float, A.count_per_citation)/convert(float, B.count_of_total_citations)*100
 			,2
 			) desc
-
 
 -- group by citations, count number of unique police officers who issued those citations, find ratio of citation counts to distinct police officers who issued those citations
 -- most of the charge descriptions that show up at the top of this query are those that with the highest number of occurences
@@ -135,7 +134,7 @@ select A.*
 from #Count_by_Officer as A
 	left outer join #Count_by_Officer as B on B.[Officer Badge #] = A.[Officer Badge #] 
 	and B.count_per_citation > A.count_per_citation
-	inner join (select [Officer Badge #]  -- is this the most efficient way for me to be doing this?  Inner joins are slower
+	inner join (select [Officer Badge #]
 				,count(*) as count_of_total_citations
 				from [dbo].[spd_PDCitations$]
 				group by [Officer Badge #]
@@ -147,8 +146,3 @@ order by round(
 			convert(float, A.count_per_citation)/convert(float, C.count_of_total_citations)*100
 			,2
 			) desc
-
-		 
-
-
-
