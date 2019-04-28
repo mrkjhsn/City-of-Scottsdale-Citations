@@ -137,3 +137,13 @@ order by count([Citation Date]) desc
 
 	where [Citation Date] = '2017-11-24 00:00:00.000'
 	order by _count_ desc
+	----------
+	-- 415 people received more than one citation at a given incident
+	select [Cited Person]
+		,[Cited Person Age]
+		,[Citation Date]
+		,count([Charge Description]) as _Count_
+	from [dbo].[spd_PDCitations$]
+	group by [Cited Person], [Cited Person Age], [Citation Date]
+	having count([Charge Description]) > 1
+	order by count([Charge Description]) desc
