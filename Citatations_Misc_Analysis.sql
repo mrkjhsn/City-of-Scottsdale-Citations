@@ -13,3 +13,25 @@
 	group by [Cited Person], [Cited Person Age], [Citation Date]
 	having count([Charge Description]) > 1
 	order by count([Charge Description]) desc
+
+	-- provide full detail of citations from above query
+
+	select A.[Cited Person]
+	,A.[Citation Type Description]
+	,convert(varchar, A.[Citation Date], 101) as Citation_Date
+	,A.[Charge Description]
+	,concat(A.[Cited Person],A.[Cited Person Age]) as unique_identifier
+	,B.count_of_citations
+from [dbo].[spd_PDCitations$] as A
+inner join (select [Cited Person]
+			,[Cited Person Age]
+			,[Citation Date]
+			,concat([Cited Person],[Cited Person Age]) as unique_identifier
+			,count(*) as count_of_citations
+		   from [dbo].[spd_PDCitations$]
+		   group by [Cited Person]
+			,[Cited Person Age]
+			,[Citation Date]
+		   having count(*) >= '2'
+		   ) as B on concat(A.[Cited Person],A.[Cited Person Age]) = B.unique_identifier
+order by B.count_of_citations desc, A.[Cited Person], A.[Charge Description]
