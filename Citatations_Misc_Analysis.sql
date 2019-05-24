@@ -35,3 +35,42 @@ inner join (select [Cited Person]
 		   having count(*) >= '2'
 		   ) as B on concat(A.[Cited Person],A.[Cited Person Age]) = B.unique_identifier
 order by B.count_of_citations desc, A.[Cited Person], A.[Charge Description]
+
+------
+select *
+from [dbo].[spd_PDCitations$] as A
+inner join (select [Cited Person] as name2
+			,[Cited Person Age] as age2
+			,[Citation Date] as date2
+			,concat([Cited Person],[Cited Person Age]) as unique_identifier
+			,count(*) as count_of_citations
+		   from [dbo].[spd_PDCitations$]
+		   group by [Cited Person]
+			,[Cited Person Age]
+			,[Citation Date]
+		   having count(*) >= '2'
+		   ) as B on concat(A.[Cited Person],A.[Cited Person Age]) = B.unique_identifier
+
+
+-- how many different types of speed related citations are there?
+select [Charge Description]
+	,count([Charge Description])
+from [dbo].[spd_PDCitations$]
+group by [Charge Description]
+having [Charge Description] like '%exceed%' or 
+	[Charge Description] like '%Speed Greater Than R&P or Posted%' or
+	[Charge Description] like '%Racing/Exhibition of Speed%'
+
+--- show all information for all citations identified in query above
+select *
+from [dbo].[spd_PDCitations$]
+where [Charge Description] like '%exceed%' or 
+	[Charge Description] like '%Speed Greater Than R&P or Posted%' or
+	[Charge Description] like '%Racing/Exhibition of Speed%'
+----
+
+select [Charge Description]
+	,count([Charge Description])
+from [dbo].[spd_PDCitations$]
+group by [Charge Description]
+order by count([Charge Description]) desc
