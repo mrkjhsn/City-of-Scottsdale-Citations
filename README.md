@@ -3,15 +3,7 @@ What can the [dataset](http://data.scottsdaleaz.gov/dataset/police-citations) of
 
 As resident of Scottsdale Arizona, I'm interested in an understanding of the city I can form by combing through it's data.  I walk, I bicycle, I drive through it regularly, I shop and grocery stores, I visit public libraries.  These daily activities have allowed me to gain an understanding of the city through direct contact.  In contrast to that understanding, what story about the city can be formed by looking at something like the citations(approximately 27K over the last year) issed by the City of Scottsdale Police Department.
 ___
-When multiple citations are issued, what are the most frequent combinations?
-<br/>
-<br/>
-![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Multiple%20Citation%20Combinations.png)  
-<br/>
-<br/>
-<br/>
 When do people most frequently speed during the day?
-<br/>
 <br/>
 ![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Speeding%20Citations%20Throughout%20the%20Day.png)
 <br/>
@@ -19,10 +11,13 @@ When do people most frequently speed during the day?
 <br/>
 When is someone most likely to blow through a stop light, or a stop sign?
 <br/>
-<br/>
 ![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Failure%20to%20Stop%20Citations%20Throughout%20the%20Day.png)
 <br/>
 <br/>
+<br/>
+When multiple citations are issued, what are the most frequent combinations?
+<br/>
+![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Multiple%20Citation%20Combinations.png)  
 <br/>
 ___
 #### Analysis by Day of the Year
