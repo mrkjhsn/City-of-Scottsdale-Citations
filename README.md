@@ -7,9 +7,9 @@ When multiple citations are issued, what are the most frequent combinations?
 <br/>
 <br/>
 ![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Multiple%20Citation%20Combinations.png)  
-<br/>  
-<br/>  
-<br/>  
+<br/>
+<br/>
+<br/>
 When do people most frequently speed during the day?
 <br/>
 <br/>
