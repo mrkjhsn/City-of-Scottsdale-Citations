@@ -17,6 +17,7 @@ When is someone most likely to blow through a stop light, or a stop sign?
 <br/>
 When multiple citations are issued, what are the most frequent combinations?
 <br/>
+<br/>
 ![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Multiple%20Citation%20Combinations.png)  
 <br/>
 ___
