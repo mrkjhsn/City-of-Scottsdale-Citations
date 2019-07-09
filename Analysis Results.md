@@ -1,3 +1,29 @@
+
+
+
+### How does the COUNT of citations track accross the year, by month and week? (2018 data)
+___
+![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/count_month_of_the_year.png)
+<br/>
+<br/>
+<br/>
+![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/count_week_of_the_year.png)
+<br/>
+<br/>
+<br/>
+### How does the MEAN citation time track accross the year, by month and week? (2018 data)
+___
+![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/mean_month_of_the_year.png)
+<br/>
+<br/>
+<br/>
+![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/mean_week_of_the_year.png)
+<br/>
+<br/>
+<br/>
+
+
+
 ### When do people most frequently speed during the day?
 ___
 ![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/Speeding%20Citations%20Throughout%20the%20Day.png)
