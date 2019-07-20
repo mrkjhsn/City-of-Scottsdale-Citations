@@ -21,7 +21,12 @@ ___
 <br/>
 <br/>
 <br/>
-
+### How does the monthly count of citations track across all the years I have access to currently? (some 2017, all 2018, some 2019)
+___
+![](https://github.com/mrkjhsn/City-of-Scottsdale-Citations/blob/master/visualizations/year_over_year.png)
+<br/>
+<br/>
+<br/>
 
 
 ### When do people most frequently speed during the day?
