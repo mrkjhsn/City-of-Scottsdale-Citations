@@ -15,6 +15,12 @@ ___
 + which locations are associated with the highest numbers of citations of any given type?
 + do citations cluster in certain areas of the city?
 
+#### Interaction between weather and citation volume
+
++ Do some weather occurences create a spike in some citations?
++ For instance, does rain or sandstorms cause more people to get into traffic accidents?
++ What about extremely hot and cold days of the year?
+
 
 #### Analysis by Police Officer
 
